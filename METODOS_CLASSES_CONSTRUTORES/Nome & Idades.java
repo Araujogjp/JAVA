@@ -1,3 +1,20 @@
+1) Crie uma classe Pessoa com atributo Nome e Idade
+
+ Solicite ao usuário essas informações de um grupo de 5 pessoas.
+
+Pegue as informações via Scanner
+
+Após o término da entrada, apresente:
+
+a média das idades,
+
+a maior idade,
+
+a menor idade,
+
+a quantidade de pessoas maior de idade.
+
+    
 import java.util.Scanner;
 public class Informacoes {
     public static void perguntarNomeEIdade(int[] idade, String[] nome){
