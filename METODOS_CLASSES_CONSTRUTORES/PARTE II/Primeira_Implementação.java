@@ -96,12 +96,15 @@ public class GerenciarFornecedores {
       while(true){
         System.out.println("Cadastro de Fornecedores");
      
-        System.out.println("Código: ");
+        System.out.println("CÃ³digo: ");
         int codigo = sc.nextInt();
+        sc.nextLine();
+        
         if(codigo < 0){
-          System.out.println("Código inválido");
+          System.out.println("CÃ³digo invÃ¡lido");
           continue;
         }
+        
         System.out.println("Nome: ");
         String nome = sc.nextLine();
 
@@ -138,8 +141,9 @@ public class GerenciarFornecedores {
     
     public void Editar(){
        System.out.println("Editar Fornecedor");
-       System.out.println("Digite o Código do Fornecedor: ");
+       System.out.println("Digite o CÃ³digo do Fornecedor: ");
        int codigoFornecedorEditar = sc.nextInt();
+       sc.nextLine();
        
        Fornecedor fornEditar = null;
        for(Fornecedor f: listFornecedores){
@@ -150,12 +154,12 @@ public class GerenciarFornecedores {
        }
        
        if(fornEditar == null){
-          System.out.println("Erro: "+fornEditar.getNome() + " não encontrado no Banco de Dados");
+          System.out.println("Erro: fornecedor nÃ£o encontrado no Banco de Dados");
           return;
        }
        
        System.out.println("Editar Fornecedor: "+fornEditar.getNome());
-       System.out.println("Deixe em branco e aperte enter se não deseja editar o dado em questão");
+       System.out.println("Deixe em branco e aperte enter se nÃ£o deseja editar o dado em questÃ£o");
        
        System.out.println("Novo Nome: ");
        String nome = sc.nextLine();
@@ -202,8 +206,9 @@ public class GerenciarFornecedores {
     public void consultar(){
                
        System.out.println("Consultar Fornecedor");
-       System.out.println("Digite o Código do Fornecedor: ");
+       System.out.println("Digite o CÃ³digo do Fornecedor: ");
        int codigoFornecedorConsultar = sc.nextInt();
+       sc.nextLine();
    
        Fornecedor fornConsultar = null;
        for(Fornecedor f: listFornecedores){
@@ -213,7 +218,7 @@ public class GerenciarFornecedores {
             }
         }
         if(fornConsultar != null){
-            System.out.println("Código: "+fornConsultar.getCodigo()+ 
+            System.out.println("CÃ³digo: "+fornConsultar.getCodigo()+ 
                            "Nome: "+fornConsultar.getNome()+                
                            "Endereco: "+fornConsultar.getEndereco()+                       
                            "Bairro: "+fornConsultar.getBairro()+
@@ -224,14 +229,15 @@ public class GerenciarFornecedores {
                                                        );
         }
         else{
-           System.out.println("Fornecedor não encontrado!");
+           System.out.println("Fornecedor nÃ£o encontrado!");
         }
     }
     
     public void remover(){
         System.out.println("Remover Fornecedor");
-        System.out.println("Digite o código do Fornecedor: ");
+        System.out.println("Digite o cÃ³digo do Fornecedor: ");
         int codigoFornecedorRemover = sc.nextInt();
+        sc.nextLine();
         
         Fornecedor fornRemover = null;
         for(Fornecedor f: listFornecedores){
@@ -243,7 +249,7 @@ public class GerenciarFornecedores {
         
         if(fornRemover != null){
            System.out.println("Nome: "+fornRemover.getNome());
-           System.out.println("Código: "+fornRemover.getCodigo());
+           System.out.println("CÃ³digo: "+fornRemover.getCodigo());
            System.out.println("Cidade: "+fornRemover.getCidade());
            System.out.println("Deseja remover s ou n?");
            String escolha = sc.nextLine();
@@ -252,8 +258,24 @@ public class GerenciarFornecedores {
                System.out.println("Fornecedor removido com sucesso!");
            }
            else{
-              System.out.println("Operação cancelada");
+              System.out.println("OperaÃ§Ã£o cancelada");
            }
+        }
+    }
+    public void listar(){
+        
+        System.out.println("Lista de Todos os Fornecedores");
+        if(listFornecedores.isEmpty()){
+           System.out.println("Nenhum fornecedor cadastrado no momento.");
+           return;
+        }
+        for(Fornecedor f: listFornecedores){
+            System.out.println(
+                "CÃ³digo: " + f.getCodigo() + 
+                " | Nome: " + f.getNome() + 
+                " | Cidade: " + f.getCidade() +
+                " | Telefone: " + f.getTelefone()
+            );
         }
     }
 }
