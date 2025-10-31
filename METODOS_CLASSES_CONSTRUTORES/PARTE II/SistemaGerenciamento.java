@@ -281,60 +281,60 @@ public class GerenciarFornecedores {
 }
 
 public class Cliente {
-    private int codigo;
-    private String nome;
-    private String endereco;
-    private String bairro;
-    private String cidade;
-    private String uf;
-    private String cep;
-    private String telefone;
+    private int codigoCli;
+    private String nomeCli;
+    private String enderecoCli;
+    private String bairroCli;
+    private String cidadeCli;
+    private String ufCli;
+    private String cepCli;
+    private String telefoneCli;
     private String cpf;
     private String rg;
     
     public Cliente(int codigo, String nome, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String cpf, String rg){
-        this.codigo = codigo;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.uf = uf;
-        this.cep = cep;
-        this.telefone = telefone;
+        this.codigoCli = codigo;
+        this.nomeCli = nome;
+        this.enderecoCli = endereco;
+        this.bairroCli = bairro;
+        this.cidadeCli = cidade;
+        this.ufCli = uf;
+        this.cepCli = cep;
+        this.telefoneCli = telefone;
         this.cpf = cpf;
         this.rg = rg;
     }
 
     public int getCodigo() {
-        return codigo;
+        return codigoCli;
     }
 
     public String getNome() {
-        return nome;
+        return nomeCli;
     }
 
     public String getEndereco() {
-        return endereco;
+        return enderecoCli;
     }
 
     public String getBairro() {
-        return bairro;
+        return bairroCli;
     }
 
     public String getCidade() {
-        return cidade;
+        return cidadeCli;
     }
 
     public String getUf() {
-        return uf;
+        return ufCli;
     }
 
     public String getCep() {
-        return cep;
+        return cepCli;
     }
 
     public String getTelefone() {
-        return telefone;
+        return telefoneCli;
     }
 
     public String getCpf() {
@@ -346,31 +346,31 @@ public class Cliente {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nomeCli = nome;
     }
 
     public void setCidade(String cidade) {
-        this.cidade = cidade;
+        this.cidadeCli = cidade;
     }
 
     public void setBairro(String bairro) {
-        this.bairro = bairro;
+        this.bairroCli = bairro;
     }
 
     public void setCep(String cep) {
-        this.cep = cep;
+        this.cepCli = cep;
     }
 
     public void setEndereco(String endereco) {
-        this.endereco = endereco;
+        this.enderecoCli = endereco;
     }
 
     public void setTelefone(String telefone) {
-        this.telefone = telefone;
+        this.telefoneCli = telefone;
     }
 
     public void setUf(String uf) {
-        this.uf = uf;
+        this.ufCli = uf;
     } 
 }
 
@@ -438,12 +438,129 @@ public class GerenciarClientes {
         int codigoCliEd = sc.nextInt();
         sc.nextLine();
         
-        Cliente CliEditar = null;
+        Cliente cliEditar = null;
         for(Cliente c: listClientes){
             if(c.getCodigo() == codigoCliEd){
-                
+                cliEditar = c;
+                break;
             }
+        }
+        
+        if(cliEditar == null){
+            System.out.println("Nenhum cliente encontrado no banco de dados");
+            return;
+        }
+        
+        System.out.println("Editar Cliente: "+cliEditar.getNome());
+        System.out.println("Se não deseja editar aperte enter");
+        
+        System.out.println("Novo Nome: ");
+        String nomeC = sc.nextLine();
+        if(!nomeC.isEmpty()){
+            cliEditar.setNome(nomeC);
+        }
+        
+        System.out.println("Novo endereço: ");
+        String enderecoC = sc.nextLine();
+        if(!enderecoC.isEmpty()){
+            cliEditar.setEndereco(enderecoC);
+        }
+        
+        System.out.println("Novo Bairro: ");
+        String bairroC = sc.nextLine();
+        if(!bairroC.isEmpty()){
+            cliEditar.setBairro(bairroC);
+        }
+        
+        System.out.println("Nova Cidade: ");
+        String cidadeC = sc.nextLine();
+        if(!cidadeC.isEmpty()){
+            cliEditar.setCidade(cidadeC);
+        }
+        
+        System.out.println("Uf: ");
+        String ufC = sc.nextLine();
+        if(!ufC.isEmpty()){
+            cliEditar.setUf(ufC);
+        }
+        
+        System.out.println("Novo Cep: ");
+        String cepC = sc.nextLine();
+        if(!ufC.isEmpty()){
+            cliEditar.setUf(ufC);
+        }
+        
+        System.out.println("Novo Telefone: ");
+        String telefoneC = sc.nextLine();
+        if(!telefoneC.isEmpty()){
+            cliEditar.setTelefone(telefoneC);
+        }
+        
+        System.out.println("Dados atualizados com sucesso!");
+    }
+    
+    public void consultar(){
+        System.out.println("Digite o Código de Cliente: ");
+        int codEditar = sc.nextInt();
+        sc.nextLine();
+        
+        Cliente cliConsultar = null;
+        for(Cliente c: listClientes){
+            if(c.getCodigo() == codEditar){
+                cliConsultar = c;
+            }
+        }
+        
+        if(cliConsultar != null){
+            System.out.println("|Nome: " +cliConsultar.getNome() +
+                               "|Código: "+cliConsultar.getCodigo() +
+                               "|Endereco:  "+cliConsultar.getEndereco()+
+                               "|Bairro: "+cliConsultar.getBairro()+
+                               "|Cidade: "+cliConsultar.getCidade()+
+                               "|Uf: "+cliConsultar.getUf()+
+                               "|Cep: "+cliConsultar.getCep()+
+                               "|Telefone: "+cliConsultar.getTelefone()+
+                               "|Cpf: "+cliConsultar.getCpf()+
+                               "|Rg: "+cliConsultar.getRg()
+                              );
+        }
+    }
+    public void remover(){
+        System.out.println("Digite o código do Cliente: ");
+        int codCRemover = sc.nextInt();
+        sc.nextLine();
+        
+        Cliente cliRemover = null;
+        for(Cliente c: listClientes){
+            if(c.getCodigo() == codCRemover){
+                cliRemover = c;
+            }
+        }
+        
+        if(cliRemover != null){
+            listClientes.remove(cliRemover);
+            System.out.println("Cliente removido com sucesso!");
+        }
+    }
+    public void listarTodos(){
+        System.out.println("Lista de Clientes: ");
+        
+        if(listClientes.isEmpty()){
+            System.out.println("Nenhum Cliente cadastrado!");
+            return;
+        }
+        for(Cliente c: listClientes){
+            System.out.println("|Nome: " +c.getNome() +
+                               "|Código: "+c.getCodigo() +
+                               "|Endereco:  "+c.getEndereco()+
+                               "|Bairro: "+c.getBairro()+
+                               "|Cidade: "+c.getCidade()+
+                               "|Uf: "+c.getUf()+
+                               "|Cep: "+c.getCep()+
+                               "|Telefone: "+c.getTelefone()+
+                               "|Cpf: "+c.getCpf()+
+                               "|Rg: "+c.getRg()
+                              );
         }
     }
 }
-
