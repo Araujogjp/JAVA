@@ -279,3 +279,100 @@ public class GerenciarFornecedores {
         }
     }
 }
+
+public class Cliente {
+    private int codigo;
+    private String nome;
+    private String endereco;
+    private String bairro;
+    private String cidade;
+    private String uf;
+    private String cep;
+    private String telefone;
+    private String cpf;
+    private String rg;
+    
+    public Cliente(int codigo, String nome, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String cpf, String rg){
+        this.codigo = codigo;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.cep = cep;
+        this.telefone = telefone;
+        this.cpf = cpf;
+        this.rg = rg;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    } 
+}
+
+
+
