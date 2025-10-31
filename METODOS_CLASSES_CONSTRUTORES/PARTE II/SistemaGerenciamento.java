@@ -382,8 +382,68 @@ public class GerenciarClientes {
     Scanner sc = new Scanner(System.in);
     
     public void Cadastrar(){
+       while(true){
+           System.out.println("Cadastro de Clientes");
+           
+           System.out.println("Código: ");
+           int codigoCli = sc.nextInt();
+           sc.nextLine();
+           
+           if(codigoCli <= 0){
+               System.out.println("Código Inválido");
+               continue;
+           }
+           
+           System.out.println("Nome: ");
+           String nomeCli = sc.nextLine();
+           
+           System.out.println("Endereço: ");
+           String enderecoCli = sc.nextLine();
+           
+           System.out.println("Bairro: ");
+           String bairroCli = sc.nextLine();
+           
+           System.out.println("Cidade: ");
+           String cidadeCli = sc.nextLine();
+           
+           System.out.println("Uf: ");
+           String ufCli = sc.nextLine();
+           
+           System.out.println("Cep: ");
+           String cepCli = sc.nextLine();
+           
+           System.out.println("Telefone: ");
+           String telefoneCli = sc.nextLine();
+           
+           System.out.println("Cpf: ");
+           String cpf = sc.nextLine();
+           
+           System.out.println("Rg: ");
+           String rg = sc.nextLine();
+                   
+           Cliente c = new Cliente(codigoCli, nomeCli, enderecoCli, bairroCli, cidadeCli, ufCli, cepCli, telefoneCli, cpf, rg);
+           listClientes.add(c);
+           
+           System.out.println("Deseja cadastrar outro cliente?(s ou n): ");
+           String cadastro = sc.nextLine();
+           
+           if(!cadastro.equalsIgnoreCase("s")){
+               break;
+           }
+       }
+    }
+    public void Editar(){
+        System.out.println("Editar Cliente");
+        System.out.println("Digite o codigo do Cliente: ");
+        int codigoCliEd = sc.nextInt();
+        sc.nextLine();
         
+        Cliente CliEditar = null;
+        for(Cliente c: listClientes){
+            if(c.getCodigo() == codigoCliEd){
+                
+            }
+        }
     }
 }
-
 
