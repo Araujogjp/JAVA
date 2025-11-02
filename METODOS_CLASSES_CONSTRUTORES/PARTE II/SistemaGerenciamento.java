@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Fornecedor {
     private int codigo;
     private String nome;
@@ -7,6 +8,7 @@ public class Fornecedor {
     private String uf;
     private String cep;
     private String telefone;
+    private ArrayList<Produto> p;
     
     public Fornecedor(int codigo, String nome, String endereco, String bairro, String cidade, String uf, String cep, String telefone){
         this.codigo = codigo;
@@ -17,6 +19,7 @@ public class Fornecedor {
         this.uf = uf;
         this.cep = cep;
         this.telefone = telefone;
+        this.p = new ArrayList<>();
     }
 
     public int getCodigo() {
@@ -83,6 +86,14 @@ public class Fornecedor {
         this.telefone = telefone;
     }
     
+    public void addProduto(Produto prod){
+        this.p.add(prod);
+    }
+    
+    public ArrayList<Produto> getProd(){
+        return this.p;
+    }
+    
 }
 
 
@@ -92,16 +103,16 @@ public class GerenciarFornecedores {
     private ArrayList<Fornecedor> listFornecedores = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
     
-    public void Cadastrar(){
+    public void cadastrar(){
       while(true){
         System.out.println("Cadastro de Fornecedores");
      
-        System.out.println("CÃ³digo: ");
+        System.out.println("Código: ");
         int codigo = sc.nextInt();
         sc.nextLine();
         
         if(codigo < 0){
-          System.out.println("CÃ³digo invÃ¡lido");
+          System.out.println("Código inválido");
           continue;
         }
         
@@ -130,18 +141,13 @@ public class GerenciarFornecedores {
         listFornecedores.add(f);
                 
         System.out.println("Fornecedor Cadastrado com sucesso!\n");
-        
-        System.out.println("Deseja cadastrar outro fornecedor? s/n: ");
-        String resposta = sc.nextLine();
-        if (!resposta.equalsIgnoreCase("s")){
-            break;
-        }
+        break;
       }
     }
     
-    public void Editar(){
+    public void editar(){
        System.out.println("Editar Fornecedor");
-       System.out.println("Digite o CÃ³digo do Fornecedor: ");
+       System.out.println("Digite o Código do Fornecedor: ");
        int codigoFornecedorEditar = sc.nextInt();
        sc.nextLine();
        
@@ -154,12 +160,12 @@ public class GerenciarFornecedores {
        }
        
        if(fornEditar == null){
-          System.out.println("Erro: fornecedor nÃ£o encontrado no Banco de Dados");
+          System.out.println("Erro: fornecedor não encontrado no Banco de Dados");
           return;
        }
        
        System.out.println("Editar Fornecedor: "+fornEditar.getNome());
-       System.out.println("Deixe em branco e aperte enter se nÃ£o deseja editar o dado em questÃ£o");
+       System.out.println("Deixe em branco e aperte enter se não deseja editar o dado em questão");
        
        System.out.println("Novo Nome: ");
        String nome = sc.nextLine();
@@ -206,7 +212,7 @@ public class GerenciarFornecedores {
     public void consultar(){
                
        System.out.println("Consultar Fornecedor");
-       System.out.println("Digite o CÃ³digo do Fornecedor: ");
+       System.out.println("Digite o Código do Fornecedor: ");
        int codigoFornecedorConsultar = sc.nextInt();
        sc.nextLine();
    
@@ -218,7 +224,7 @@ public class GerenciarFornecedores {
             }
         }
         if(fornConsultar != null){
-            System.out.println("CÃ³digo: "+fornConsultar.getCodigo()+ 
+            System.out.println("Código: "+fornConsultar.getCodigo()+ 
                            "Nome: "+fornConsultar.getNome()+                
                            "Endereco: "+fornConsultar.getEndereco()+                       
                            "Bairro: "+fornConsultar.getBairro()+
@@ -229,13 +235,13 @@ public class GerenciarFornecedores {
                                                        );
         }
         else{
-           System.out.println("Fornecedor nÃ£o encontrado!");
+           System.out.println("Fornecedor não encontrado!");
         }
     }
     
     public void remover(){
         System.out.println("Remover Fornecedor");
-        System.out.println("Digite o cÃ³digo do Fornecedor: ");
+        System.out.println("Digite o código do Fornecedor: ");
         int codigoFornecedorRemover = sc.nextInt();
         sc.nextLine();
         
@@ -249,8 +255,6 @@ public class GerenciarFornecedores {
         
         if(fornRemover != null){
            System.out.println("Nome: "+fornRemover.getNome());
-           System.out.println("CÃ³digo: "+fornRemover.getCodigo());
-           System.out.println("Cidade: "+fornRemover.getCidade());
            System.out.println("Deseja remover s ou n?");
            String escolha = sc.nextLine();
            if(escolha.equalsIgnoreCase("s")){
@@ -258,8 +262,11 @@ public class GerenciarFornecedores {
                System.out.println("Fornecedor removido com sucesso!");
            }
            else{
-              System.out.println("OperaÃ§Ã£o cancelada");
+              System.out.println("Operação cancelada");
            }
+        }
+        else{
+            System.out.println("Fornecedor não cadastrado");
         }
     }
     public void listar(){
@@ -271,7 +278,7 @@ public class GerenciarFornecedores {
         }
         for(Fornecedor f: listFornecedores){
             System.out.println(
-                "CÃ³digo: " + f.getCodigo() + 
+                "Código: " + f.getCodigo() + 
                 " | Nome: " + f.getNome() + 
                 " | Cidade: " + f.getCidade() +
                 " | Telefone: " + f.getTelefone()
@@ -279,6 +286,7 @@ public class GerenciarFornecedores {
         }
     }
 }
+
 
 public class Cliente {
     private int codigoCli;
@@ -381,7 +389,7 @@ public class GerenciarClientes {
     private ArrayList<Cliente> listClientes = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
     
-    public void Cadastrar(){
+    public void cadastrar(){
        while(true){
            System.out.println("Cadastro de Clientes");
            
@@ -426,13 +434,10 @@ public class GerenciarClientes {
            
            System.out.println("Deseja cadastrar outro cliente?(s ou n): ");
            String cadastro = sc.nextLine();
-           
-           if(!cadastro.equalsIgnoreCase("s")){
-               break;
-           }
+           break;
        }
     }
-    public void Editar(){
+    public void editar(){
         System.out.println("Editar Cliente");
         System.out.println("Digite o codigo do Cliente: ");
         int codigoCliEd = sc.nextInt();
@@ -487,7 +492,7 @@ public class GerenciarClientes {
         System.out.println("Novo Cep: ");
         String cepC = sc.nextLine();
         if(!ufC.isEmpty()){
-            cliEditar.setUf(ufC);
+            cliEditar.setCep(cepC);
         }
         
         System.out.println("Novo Telefone: ");
@@ -538,8 +543,19 @@ public class GerenciarClientes {
         }
         
         if(cliRemover != null){
-            listClientes.remove(cliRemover);
-            System.out.println("Cliente removido com sucesso!");
+            System.out.println("Cliente: "+cliRemover.getNome());
+            System.out.println("Deseja remover?:(s ou n) ");
+            String resposta = sc.nextLine();
+            if(resposta.equalsIgnoreCase("s")){
+                listClientes.remove(cliRemover);
+                System.out.println("Cliente removido com sucesso!");
+            }
+            else{
+                System.out.println("Operação Cancelada");
+            }
+        }
+        else{
+            System.out.println("Cliente não cadastrado no Banco de Dados");
         }
     }
     public void listarTodos(){
@@ -564,3 +580,233 @@ public class GerenciarClientes {
         }
     }
 }
+
+
+import java.util.ArrayList;
+public class Produto {
+    private int codigoProd;
+    private String nomeProd;
+    private double valorProd;
+    private int estoqueProd;
+    private Fornecedor f;
+    
+    public Produto(int codigoProd, String nomeProd, double valorProd, int estoqueProd){
+        this.codigoProd = codigoProd;
+        this.nomeProd = nomeProd;
+        this.valorProd = valorProd;
+        this.estoqueProd = 0;
+        this.f = f;
+    }
+
+    public int getCodigoProd() {
+        return codigoProd;
+    }
+
+    public String getNomeProd() {
+        return nomeProd;
+    }
+
+    public double getValorProd() {
+        return valorProd;
+    }
+   
+    public int getEstoqueProd() {
+        return estoqueProd;
+    }
+
+    public void setNomeProd(String nomeProd) {
+        this.nomeProd = nomeProd;
+    }
+    
+    public void setEstoqueProd(int estoqueProd) {
+        this.estoqueProd = estoqueProd;
+    }
+
+    public void setValorProd(double valorProd) {
+        this.valorProd = valorProd;
+    }
+}
+
+import java.util.ArrayList;
+import java.util.Scanner;
+public class GerenciarProdutos {
+    private ArrayList<Produto> listProdutos = new ArrayList<>();
+    Scanner sc = new Scanner(System.in);
+    
+    public void cadastrar(){
+        while(true){
+            System.out.println("Cadastro de Produto");
+            System.out.println("Digite o cÃ³digo do Produto: ");
+            int codigoProd = sc.nextInt();
+            sc.nextLine();
+            if(codigoProd < 0){
+                System.out.println("CÃ³digo invÃ¡lido");
+                continue;
+            }
+            System.out.println("Nome do Produto: ");
+            String nomeProd = sc.nextLine();
+            
+            System.out.println("Valor do Produto: ");
+            double valorProd = sc.nextDouble();
+            sc.nextLine();
+            if(valorProd <= 0){
+                System.out.println("Valor invÃ¡lido");
+                continue;
+            }
+            
+            System.out.println("Qtd em Estoque: ");
+            int estoqueProd = sc.nextInt();
+            sc.nextLine();
+            if(estoqueProd < 0){
+                System.out.println("ERRO, Qtd em Estoque invÃ¡lido");
+                continue;
+            }
+            Produto prod = new Produto(codigoProd, nomeProd, valorProd, estoqueProd);
+            listProdutos.add(prod);
+            System.out.println("Produto cadastrado com sucesso!");
+            break;
+        }
+    }
+    public void editar(){
+        System.out.println("Alterar Produtos");
+        System.out.println("CÃ³digo do Produto: ");
+        int codAlterarProd = sc.nextInt();
+        sc.nextLine();
+        Produto prodAlterar = null;
+        for(Produto p : listProdutos){
+            if(p.getCodigoProd() == codAlterarProd){
+                prodAlterar = p;
+                break;
+            }
+        }
+        if(prodAlterar == null){
+            System.out.println("Nenhum produto encontrado no Banco de Dados");
+            return;
+        }
+        
+        System.out.println("Produto("+prodAlterar.getNomeProd()+")");
+        System.out.println("Se nÃ£o deseje alterar apenas clique no enter");
+        
+        System.out.println("Novo Nome: ");
+        String novoNome = sc.nextLine();
+        if(!novoNome.isEmpty()){
+           prodAlterar.setNomeProd(novoNome);
+        }
+        
+        
+        System.out.print("Novo Valor ("+prodAlterar.getValorProd()+"): ");
+        String novoValorStr = sc.nextLine(); 
+        if (!novoValorStr.isEmpty()) { 
+            try {
+                double novoValor = Double.parseDouble(novoValorStr); 
+                if (novoValor > 0) {
+                    prodAlterar.setValorProd(novoValor); 
+                } else {
+                    System.out.println("Valor deve ser positivo. AlteraÃ§Ã£o ignorada.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada invÃ¡lida. Valor nÃ£o alterado.");
+            }
+        }
+
+        System.out.print("Estoque Atualizado ("+prodAlterar.getEstoqueProd()+"): ");
+        String novoEstoqueStr = sc.nextLine(); 
+        if (!novoEstoqueStr.isEmpty()) { 
+            try {
+                int novoEstoque = Integer.parseInt(novoEstoqueStr); 
+                if (novoEstoque >= 0) {
+                    prodAlterar.setEstoqueProd(novoEstoque); 
+                } else {
+                    System.out.println("Estoque deve ser zero ou mais. AlteraÃ§Ã£o ignorada.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada invÃ¡lida. Estoque nÃ£o alterado.");
+            }
+        }
+    }
+    
+    public void consultar(){
+        System.out.println("Consulta de Produtos");
+        System.out.println("Digite o cÃ³digo do Produto: ");
+        int codConsultarProd = sc.nextInt();
+        sc.nextLine();
+        Produto prodConsultar = null;
+        for(Produto p: listProdutos){
+            if(p.getCodigoProd() == codConsultarProd){
+                prodConsultar = p;
+                break;
+            }
+        }
+        
+        if(prodConsultar != null){
+            System.out.println("CÃ³digo do Produto: "+prodConsultar.getCodigoProd());
+            System.out.println("Nome do Produto: "+prodConsultar.getNomeProd());
+            System.out.println("Valor do Produto: "+prodConsultar.getValorProd());
+            System.out.println("Estoque: "+prodConsultar.getEstoqueProd());
+            System.out.println("Valor Total Em Estoque: "+prodConsultar.getValorProd() * prodConsultar.getEstoqueProd());
+        }
+        else{
+            System.out.println("Produto nÃ£o cadastrado no Banco de Dados");
+        }
+    }
+    
+    public void remover(){
+        System.out.println("Remover Produtos");
+        System.out.println("Digite o cÃ³digo do Produto: ");
+        
+        int codigoProdRemover = sc.nextInt();
+        sc.nextLine();
+        Produto prodRemover = null;
+        for(Produto p: listProdutos){
+            if(p.getCodigoProd() == codigoProdRemover){
+                prodRemover = p;
+                break;
+            }
+        }
+        
+        if(prodRemover != null){
+            System.out.println("Deseja mesmo remover o produto?:(s ou n)");
+            String resposta = sc.nextLine();
+            if(resposta.equalsIgnoreCase("s")){
+                listProdutos.remove(prodRemover);
+                System.out.println("Produto removido com sucesso!");
+            }
+            else {
+            System.out.println("OperaÃ§Ã£o cancelada");
+            }
+        }
+        else{
+            System.out.println("Produto nÃ£o cadastrado");
+        }
+    }
+    
+    public void listar(){
+        System.out.println("Listagem de Todos os Produtos: ");
+        if(listProdutos.isEmpty()){
+            System.out.println("Nenhum produto cadastrado");
+            return;
+        }
+        for(Produto p : listProdutos){
+            System.out.println("|Nome: "+p.getNomeProd()+
+                               "|CÃ³digo: "+p.getCodigoProd()+
+                               "|Valor: "+p.getValorProd()+
+                               "|Estoque: "+p.getEstoqueProd()
+                               );
+        }
+    }
+    
+    public void valorTotalEstoque(){
+       double valorT;
+       int estoqueT;
+       double valorProdNoEstoque;
+       double valorTotalDoEstoque = 0;
+       for(Produto p : listProdutos){
+           valorT = p.getValorProd();
+           estoqueT = p.getEstoqueProd();
+           valorProdNoEstoque = valorT * estoqueT;
+           valorTotalDoEstoque += valorProdNoEstoque;
+       }
+       System.out.printf("O Valor Total do Estoque Ã©: R$ %.2f%n",valorTotalDoEstoque);
+    }
+}
+
