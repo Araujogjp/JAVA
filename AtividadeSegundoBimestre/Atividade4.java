@@ -8,8 +8,12 @@
         this.telefone = telefone;
     }
 
-    public String getNome() { return nome; }
-    public String getTelefone() { return telefone; }
+    public String getNome() { 
+      return nome; 
+    }
+    public String getTelefone() {
+      return telefone; 
+    }
     
     @Override
     public String toString() {
@@ -86,18 +90,21 @@ public class Pedido {
         
         if (statusAtual.equals("aguardando") && novoStatusLower.equals("em preparo")) {
             transicaoValida = true;
-        } else if (statusAtual.equals("em preparo") && novoStatusLower.equals("saiu para entrega")) {
+        } 
+        else if (statusAtual.equals("em preparo") && novoStatusLower.equals("saiu para entrega")) {
             transicaoValida = true;
-        } else if (statusAtual.equals("saiu para entrega") && novoStatusLower.equals("entregue")) {
+        } 
+        else if (statusAtual.equals("saiu para entrega") && novoStatusLower.equals("entregue")) {
             transicaoValida = true;
-        } else if (statusAtual.equals(novoStatusLower)) {
-           
+        } 
+        else if (statusAtual.equals(novoStatusLower)) {
             return; 
         }
 
         if (transicaoValida) {
             this.status = novoStatus;
-        } else {
+        } 
+        else {
             throw new IllegalStateException(
                 "Transição de status inválida: de '" + this.status + "' para '" + novoStatus + "'."
             );
@@ -142,7 +149,8 @@ public class AtividadeAvaliativa {
             p1.alterarStatus("Entregue");
             System.out.println("3. OK: " + p1.getStatus());
 
-        } catch (IllegalStateException e) {
+        } 
+        catch (IllegalStateException e) {
             System.err.println("ERRO INESPERADO: " + e.getMessage());
         }
         
@@ -158,7 +166,8 @@ public class AtividadeAvaliativa {
             System.out.println("Tentando alterar de " + p2.getStatus() + " para Entregue...");
             p2.alterarStatus("Entregue"); 
             System.out.println("Status p2 após tentativa: " + p2.getStatus());
-        } catch (IllegalStateException e) {
+        } 
+        catch (IllegalStateException e) {
            
             System.err.println("4. ERRO CAPTURADO (Transição Inválida): " + e.getMessage());
             System.out.println("Status p2 permaneceu: " + p2.getStatus());
