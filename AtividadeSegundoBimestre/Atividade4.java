@@ -9,10 +9,10 @@
     }
 
     public String getNome() { 
-      return nome; 
+        return nome; 
     }
-    public String getTelefone() {
-      return telefone; 
+    public String getTelefone() 
+    { return telefone; 
     }
     
     @Override
@@ -37,9 +37,15 @@ public class ItemPedido {
         return quantidade * precoUnitario;
     }
 
-    public String getProduto() { return produto; }
-    public int getQuantidade() { return quantidade; }
-    public double getPrecoUnitario() { return precoUnitario; }
+    public String getProduto() { 
+        return produto; 
+    }
+    public int getQuantidade() { 
+        return quantidade; 
+    }
+    public double getPrecoUnitario() {
+        return precoUnitario; 
+    }
 }
 
 // Classe Pedido
@@ -93,7 +99,7 @@ public class Pedido {
         } 
         else if (statusAtual.equals("em preparo") && novoStatusLower.equals("saiu para entrega")) {
             transicaoValida = true;
-        } 
+        }
         else if (statusAtual.equals("saiu para entrega") && novoStatusLower.equals("entregue")) {
             transicaoValida = true;
         } 
@@ -103,8 +109,7 @@ public class Pedido {
 
         if (transicaoValida) {
             this.status = novoStatus;
-        } 
-        else {
+        } else {
             throw new IllegalStateException(
                 "Transição de status inválida: de '" + this.status + "' para '" + novoStatus + "'."
             );
@@ -112,10 +117,18 @@ public class Pedido {
     }
 
     
-    public Cliente getCliente() { return cliente; }
-    public double getValorTotal() { return valorTotal; }
-    public String getStatus() { return status; }
-    public List<ItemPedido> getItens() { return itens; }
+    public Cliente getCliente() { 
+        return cliente; 
+    }
+    public double getValorTotal() { 
+        return valorTotal; 
+    }
+    public String getStatus() {
+        return status; 
+    }
+    public List<ItemPedido> getItens() { 
+        return itens; 
+    }
 
     @Override
     public String toString() {
@@ -136,7 +149,7 @@ public class AtividadeAvaliativa {
         p1.adicionarItem(new ItemPedido("Hambúrguer Clássico", 2, 25.00));
         p1.adicionarItem(new ItemPedido("Refrigerante Cola", 3, 7.50));
 
-        System.out.println("--- TESTE P1 (CORRETO) ---");
+        System.out.println("TESTE P1 (CORRETO)");
         System.out.println("INICIAL: " + p1);
 
         try {
@@ -149,27 +162,24 @@ public class AtividadeAvaliativa {
             p1.alterarStatus("Entregue");
             System.out.println("3. OK: " + p1.getStatus());
 
-        } 
-        catch (IllegalStateException e) {
+        } catch (IllegalStateException e) {
             System.err.println("ERRO INESPERADO: " + e.getMessage());
         }
         
-        System.out.println("\n--------------------------\n");
 
         
         Pedido p2 = new Pedido(new Cliente("Bruno M.", "1111-2222"));
-        System.out.println("--- TESTE P2 (INCORRETO) ---");
+        System.out.println("TESTE P2 (INCORRETO) ");
         System.out.println("INICIAL: " + p2.getStatus());
         
         try {
            
-            System.out.println("Tentando alterar de " + p2.getStatus() + " para Entregue...");
+            System.out.println("Tentando alterar de " + p2.getStatus() + " para Entregue");
             p2.alterarStatus("Entregue"); 
             System.out.println("Status p2 após tentativa: " + p2.getStatus());
-        } 
-        catch (IllegalStateException e) {
+        } catch (IllegalStateException e) {
            
-            System.err.println("4. ERRO CAPTURADO (Transição Inválida): " + e.getMessage());
+            System.err.println("ERRO CAPTURADO (Transição Inválida): " + e.getMessage());
             System.out.println("Status p2 permaneceu: " + p2.getStatus());
         }
     }
