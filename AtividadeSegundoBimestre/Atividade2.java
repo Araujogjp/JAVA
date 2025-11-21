@@ -62,7 +62,7 @@ public class AtividadeAvaliativa {
 
     public static void main(String[] args) {
         Pagamento p1 = new PagamentoCartao(150.0, "1234 5678 9000 1111");
-        Pagamento p2 = new PagamentoPix(75.5, "email@exemplo.com");
+        Pagamento p2 = new PagamentoPix(75.5, "yuriAlberto@golaberto.com");
 
         Caixa caixa = new Caixa();
         caixa.processarPagamentos(Arrays.asList(p1, p2));
